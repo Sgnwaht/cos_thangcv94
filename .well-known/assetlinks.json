@@ -1,8 +1,5 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "vn.fpt.vung1",
-        "sha256_cert_fingerprints": ["43:EF:81:94:B6:F1:68:9A:7E:30:5F:E5:96:7B:D1:6E:91:13:D0:CE:66:88:EB:C3:43:C2:63:36:F2:3E:D7:58"]
-      }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "cos.thangcv94",
+               "sha256_cert_fingerprints": ["43:EF:81:94:B6:F1:68:9A:7E:30:5F:E5:96:7B:D1:6E:91:13:D0:CE:66:88:EB:C3:43:C2:63:36:F2:3E:D7:58"] }
+}]
