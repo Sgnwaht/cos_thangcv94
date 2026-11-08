@@ -1,6 +1,6 @@
 {
-  "name": "FPT Telecom Vùng 1 - Kinh Dịch Thuật",
-  "short_name": "FPT Vùng 1",
+  "name": "Care or Sell",
+  "short_name": "CoS",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
