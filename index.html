@@ -983,6 +983,20 @@ async function khImport(file){
   }catch(e){toast('Nạp CSDL lỗi: '+(e&&e.message||e))}}
 function khStat(){var e=$('khStat');if(!e)return;khCount().then(function(n){var w=khWhen(khMeta());e.textContent=n?'Đang có '+n.toLocaleString('vi')+' khách'+(w?' · cập nhật '+w:''):'Chưa nạp CSDL. Xuất file từ trang Phân tích khách hàng rồi nạp vào đây.'}).catch(function(){e.textContent='Không đọc được CSDL trên máy này'})}
 function khWipe(){if(!ask('Xóa toàn bộ CSDL tra cứu khách?'))return;khClear().then(function(){try{localStorage.removeItem(KH_META)}catch(e){}toast('Đã xóa CSDL tra cứu');khStat()}).catch(function(){toast('Không xóa được')})}
+/* Tự nạp CSDL khách hàng từ csdl.jsonl.gz (cùng thư mục index.html) khi máy chưa có dữ liệu */
+var KH_AUTO_URL='csdl.jsonl.gz';
+async function khAutoLoad(){
+  try{
+    var n=0;try{n=await khCount()}catch(e){}
+    if(n>0)return;
+    if(!window.DecompressionStream){toast('Trình duyệt chưa hỗ trợ tự nạp CSDL, hãy nạp file .jsonl thủ công');return}
+    toast('Đang tải CSDL khách hàng lần đầu…');
+    var r=await fetch(KH_AUTO_URL,{cache:'no-cache'});
+    if(!r.ok)throw new Error('không tải được file (HTTP '+r.status+')');
+    var blob=await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).blob();
+    await khImport(new File([blob],'csdl.jsonl',{type:'text/plain'}));
+  }catch(e){toast('Tự nạp CSDL lỗi: '+(e&&e.message||e))}
+}
 function khCardHtml(){setTimeout(khStat,150);
   return '<div class="card2"><div class="collapse-header collapsed" onclick="toggleCollapse(\'collapseKh\', this)"><span><i class="fa-solid fa-database"></i> CSDL tra cứu khách (chatbot)</span><i class="fa-solid fa-chevron-down"></i></div><div id="collapseKh" style="display:none;margin-top:12px"><div class="sb" id="khStat" style="margin-bottom:8px">Đang kiểm tra…</div><div class="two"><button class="btn s" onclick="khPick()"><i class="fa-solid fa-file-import"></i> Nạp CSDL (.jsonl)</button><button class="btn s" onclick="khWipe()"><i class="fa-regular fa-trash-can"></i> Xóa CSDL</button></div></div></div>'}
 
@@ -2298,6 +2312,7 @@ else{
   });
 }
 try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(function(){})}catch(e){}
+setTimeout(khAutoLoad,1500);
 </script>
 <script>
 /* ===== Thùng rác: lưu lại khách hàng đã xóa, có thể khôi phục ===== */
