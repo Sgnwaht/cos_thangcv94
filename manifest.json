@@ -1,24 +1,19 @@
 {
-  "name": "Care or Sell",
-  "short_name": "CoS",
+  "name": "FPT Telecom Vùng 1 - Kinh Dịch Thuật",
+  "short_name": "FPT Vùng 1",
+  "description": "Trợ lý tư vấn Care & Sell cho FPT Telecom Vùng 1",
+  "lang": "vi",
+  "id": "./",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f3f4f8",
+  "background_color": "#f27124",
   "theme_color": "#f27124",
-  "lang": "vi",
-"icons": [
-  {
-    "src": "./icon-192.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  },
-  {
-    "src": "./icon-512.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }
-]
-]
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }
